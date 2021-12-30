@@ -22,7 +22,8 @@ namespace Tests
         [Fact]
         public void Should_skip_weekends()
         {
-            Assert.Equal(workdayCalendar.GetWorkdayIncrement(friday, 1), monday);
+            Assert.Equal(DayOfWeek.Friday, friday.DayOfWeek);
+            Assert.Equal(friday.AddDays(3), workdayCalendar.GetWorkdayIncrement(friday, 1));
         }
         
         [Fact]
