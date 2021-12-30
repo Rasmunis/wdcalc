@@ -29,7 +29,7 @@ namespace Tests
         [Fact]
         public void Should_skip_holidays()
         {
-            workdayCalendar.SetHoliday(tuesday);
+            workdayCalendar.SetHoliday(tuesday.Date);
             Assert.Equal(workdayCalendar.GetWorkdayIncrement(monday, 1), wednesday);
         }
         
