@@ -105,5 +105,22 @@ namespace Tests
             var incrementedDate = new DateTime(2004, eM, ed, eh, em, 0);
             Assert.Equal(workdayCalendar.GetWorkdayIncrement(startDate, increment), incrementedDate);
         }
+        
+        [Fact]
+        public void Should_throw_on_invalid_recurring_holiday()
+        {
+            Assert.Throws<ArgumentException>(() => workdayCalendar.SetRecurringHoliday(13, 11));
+        }
+        
+        [Fact]
+        public void Should_throw_on_invalid_workday_start_and_stop()
+        {
+            ArgumentException startTimeException = Assert.Throws<ArgumentException>(() => workdayCalendar.SetWorkdayStartAndStop(100, 10, 12, 10));
+            Assert.Equal("Start-time is not valid", startTimeException.Message);
+            ArgumentException stopTimeException = Assert.Throws<ArgumentException>(() => workdayCalendar.SetWorkdayStartAndStop(12, 10, 100, 10));
+            Assert.Equal("Stop-time is not valid", stopTimeException.Message);
+            ArgumentException startLessThanStopException = Assert.Throws<ArgumentException>(() => workdayCalendar.SetWorkdayStartAndStop(16, 0, 12, 0));
+            Assert.Equal("The start time must be less than the stop time", startLessThanStopException.Message);
+        }
     }
 }
