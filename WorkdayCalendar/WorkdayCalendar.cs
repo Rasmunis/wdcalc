@@ -123,13 +123,13 @@ namespace WorkdayCalendar
             if (minutesToAdd + minutesFromStartTimeOnStartDate < 0)
             {
                 workdaysToAdd -= 1;
-                minutesToAdd = minutesFromStartTimeOnStartDate + minutesToAdd;
+                minutesToAdd += MinutesInAWorkday;
             }
             
             if (minutesToAdd + minutesFromStartTimeOnStartDate > MinutesInAWorkday)
             {
                 workdaysToAdd += 1;
-                minutesToAdd = minutesToAdd + minutesFromStartTimeOnStartDate - MinutesInAWorkday;
+                minutesToAdd -= MinutesInAWorkday;
             }
 
             return Tuple.Create((int)workdaysToAdd, (int)minutesToAdd);
