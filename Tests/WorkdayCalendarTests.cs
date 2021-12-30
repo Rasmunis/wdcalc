@@ -122,5 +122,13 @@ namespace Tests
             ArgumentException startLessThanStopException = Assert.Throws<ArgumentException>(() => workdayCalendar.SetWorkdayStartAndStop(16, 0, 12, 0));
             Assert.Equal("The start time must be less than the stop time", startLessThanStopException.Message);
         }
+        
+        [Fact]
+        public void Should_handle_leap_year()
+        {
+            var startDate = new DateTime(2020, 2, 28, 12, 0, 0);
+            var incrementedDate = new DateTime(2020, 3, 2, 12, 0, 0);
+            Assert.Equal(workdayCalendar.GetWorkdayIncrement(startDate, 1), incrementedDate);
+        }
     }
 }
