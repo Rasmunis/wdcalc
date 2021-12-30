@@ -31,7 +31,7 @@ namespace WorkdayCalendar
         public void SetRecurringHoliday(int month, int day)
         {
             // using 2020 as it is a leap year, making 29th of february a valid combination
-            if (DateTime.TryParse($"{day}/{month}/2020", out DateTime date))
+            if (DateTime.TryParse($"{month}/{day}/2020", out DateTime date))
             {
                 RecurringHolidays.Add(new RecurringHoliday(month, day));
             }
