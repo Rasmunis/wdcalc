@@ -86,7 +86,7 @@ namespace WorkdayCalendar
                 while (workdaysIncremented != workdaysToAdd + stepSize)
                 {
                     var dateCursor = parsedStartDate.AddDays(daysIncremented);
-                    if (Holidays.Contains(dateCursor))
+                    if (Holidays.Contains(dateCursor.Date))
                     {
                         daysIncremented += stepSize;
                     }
