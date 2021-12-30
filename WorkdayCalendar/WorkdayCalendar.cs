@@ -25,7 +25,7 @@ namespace WorkdayCalendar
         
         public void SetHoliday(DateTime date)
         {
-            Holidays.Add(date);
+            Holidays.Add(date.Date);
         }
 
         public void SetRecurringHoliday(int month, int day)
