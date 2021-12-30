@@ -60,5 +60,36 @@ namespace Tests
         {
             Assert.Equal(workdayCalendar.GetWorkdayIncrement(thursday, -1.25m), wednesday.AddHours(-2));
         }
+        
+        [Fact]
+        public void Should_handle_invalid_start_date()
+        {
+            var startDate = new DateTime(2021, 12, 6, 1, 0, 0);
+            var parsedAndIncrementedDate = new DateTime(2021, 12, 7, 8, 0, 0);
+            Assert.Equal(workdayCalendar.GetWorkdayIncrement(startDate, 1), parsedAndIncrementedDate);
+        }
+        
+        [Fact]
+        public void Should_handle_the_fraction_decrementing_an_extra_workday()
+        {
+            var decrementedDay = monday.AddHours(2); // Monday at 14:00
+            Assert.Equal(workdayCalendar.GetWorkdayIncrement(wednesday, -1.75m), decrementedDay);
+        }
+        
+        [Fact]
+        public void Should_handle_the_fraction_incrementing_an_extra_workday()
+        {
+            var incrementedDay = friday.AddHours(-2); // Friday at 10:00
+            Assert.Equal(workdayCalendar.GetWorkdayIncrement(wednesday, 1.75m), incrementedDay);
+        }
+        
+        [Fact]
+        public void Should_handle_a_weirdly_sized_workday()
+        {
+            var startDate = new DateTime(2021, 12, 8, 8, 18, 0);
+            var incrementedDate = new DateTime(2021, 12, 6, 8, 48, 0);
+            workdayCalendar.SetWorkdayStartAndStop(8, 12, 8, 52);
+            Assert.Equal(workdayCalendar.GetWorkdayIncrement(startDate, -1.25m), incrementedDate);
+        }
     }
 }
