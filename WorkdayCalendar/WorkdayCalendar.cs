@@ -116,7 +116,7 @@ namespace WorkdayCalendar
         private Tuple<int, int> GetWorkdaysAndMinutesToAdd(DateTime startDate, decimal incrementInWorkDays)
         {
             var workdaysToAdd = Math.Truncate(incrementInWorkDays);
-            var minutesToAdd = Decimal.Round((incrementInWorkDays - workdaysToAdd) * MinutesInAWorkday);
+            var minutesToAdd = Math.Round((incrementInWorkDays - workdaysToAdd) * MinutesInAWorkday, MidpointRounding.ToZero);
             var minutesFromStartTimeOnStartDate = (int)(startDate - new DateTime(startDate.Year, startDate.Month,
                 startDate.Day, StartHours, StartMinutes, 0)).TotalMinutes;
 
