@@ -91,5 +91,19 @@ namespace Tests
             workdayCalendar.SetWorkdayStartAndStop(8, 12, 8, 52);
             Assert.Equal(workdayCalendar.GetWorkdayIncrement(startDate, -1.25m), incrementedDate);
         }
+        
+        [Theory]
+        [InlineData(5, 24, 19, 3, 7, 27, 13, 47, 44.723656)]
+        [InlineData(5, 24, 18, 3, 5, 13, 10, 2, -6.7470217)]
+        [InlineData(5, 24, 8, 3, 6, 10, 14, 18, 12.782709)]
+        [InlineData(5, 24, 7, 3, 6, 4, 10, 12, 8.276628)]
+        public void Should_handle_values_from_vivende_document(int sM, int sd, int sh, int sm, int eM, int ed, int eh, int em, decimal increment)
+        {
+            workdayCalendar.SetRecurringHoliday(5, 17);
+            workdayCalendar.SetHoliday(new DateTime(2004, 5, 27));
+            var startDate = new DateTime(2004, sM, sd, sh, sm, 0);
+            var incrementedDate = new DateTime(2004, eM, ed, eh, em, 0);
+            Assert.Equal(workdayCalendar.GetWorkdayIncrement(startDate, increment), incrementedDate);
+        }
     }
 }
